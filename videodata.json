@@ -1,0 +1,25 @@
+{
+  "categoryName": "Polityka",
+  "question": [
+    {
+      "questionContent": "Jakie ugrupowanie wygrało wybory parlamentarne w 2015 w Polsce?",
+      "answer":[
+        {"id":"1","answerContent":"PiS"},
+        {"id":"2","answerContent":"PO"},
+        {"id":"3","answerContent":"PSL"},
+        {"id":"4","answerContent":"KORWIN"}
+      ],
+      "correctID": "1"
+    },
+    {
+      "questionContent": "Co lubisz jesc?",
+      "answer":[
+        {"id":"1","answerContent":"Placki"},
+        {"id":"2","answerContent":"Pizza"},
+        {"id":"3","answerContent":"Kurczak"},
+        {"id":"4","answerContent":"Pierogi"}
+      ],
+      "correctID": "1"
+    }
+  ]
+}

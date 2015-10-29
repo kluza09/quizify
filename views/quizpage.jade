@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  -var questionNumber = Math.floor(Math.random()*questions.question.length);
+  section#quiz
+    .container
+      h1= title
+      h3= questions.question[questionNumber].questionContent
+      -for(var i=0; i < 4; i++)
+        .col-sm-6 
+          p= questions.question[questionNumber].answer[i].answerContent
+      a(href="/quizpage") Go to Quiz
