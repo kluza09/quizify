@@ -1,14 +1,32 @@
+@import "partials/fonts"
+
+$second: #663399
+$main: white
+
+
+/* indexpage layout */
+#index
+  background: $second
+  height: 100vh
+  text-align: center
+  color: $main
+  h1
+    margin: 0
+    padding: 30vh 0 0 0
 /* quizpage layout */
 #quiz
   color: white
   height: 100vh
   width: 100%
-  background: #663399
+  background: $second
+  font-family: roboto_regular
 
   h1
     padding: 0
     margin: 20vh 0 0 0
     color: white
+    text-align: center
+  h2
     text-align: center
   h3
     text-align: center
@@ -26,3 +44,5 @@
     font-size: 18px
     &:active
       background-image: linear-gradient(to top, white, #ddd)
+a
+  padding: 20px

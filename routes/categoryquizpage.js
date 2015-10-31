@@ -6,17 +6,7 @@ router.get('/', function(req, res, next) {
   var db = req.db;
 
   var collection = db.get('quiz');
-  collection.find({},{},function(e,docs){
-      var questionNumber = Math.floor(Math.random()*docs.length);
-      res.render('quizpage', { title: 'QUIZ', "questions" : docs[questionNumber] });
-  });
-});
-
-router.post('/', function(req, res) {
-  var db = req.db;
-  
-  var collection = db.get('quiz');
-  collection.find({category: req.body.categories},{},function(e,docs){
+  collection.find({category:"polityka"},{},function(e,docs){
       var questionNumber = Math.floor(Math.random()*docs.length);
       res.render('quizpage', { title: 'QUIZ', "questions" : docs[questionNumber] });
   });

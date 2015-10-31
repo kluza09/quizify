@@ -6,10 +6,17 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var sass = require('node-sass');
 var sassMiddleware = require('node-sass-middleware')
+var mongo = require('mongodb')
+var monk = require('monk');
+
+var db =  monk('127.0.0.1:27017/questions');
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var quizpage = require('./routes/quizpage');
+var categoryquizpage = require('./routes/categoryquizpage');
+var addquiz = require('./routes/addquiz');
 
 var app = express();
 
@@ -33,9 +40,16 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/quizpage', quizpage);
+app.use('/addquiz', addquiz);
+app.use('/catquizpage', categoryquizpage)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

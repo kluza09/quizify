@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1= title
+  -if(errorArray !== undefined ) 
+    #error-holder
+      -for(var j=0; j < errorArray.length; j++)
+        h5= errorArray[j]
+  .container
+    form(method="post", action="/addquiz")
+      label Treść pytania:
+      textarea(type="text", name="contentQ", placeholder="pytanie")
+      </br>
+      label Poprawna odpowiedz:
+      input(type="text", name="corAns", placeholder="Poprawna odpowiedz")
+      </br>
+      label Błędna odpowiedz 1:
+      input(type="text", name="incorAns1", placeholder="Niepoprawna odpowiedz")
+      </br>
+      label Błędna odpowiedz 2:
+      input(type="text", name="incorAns2", placeholder="Niepoprawna odpowiedz")
+      </br>
+      label Błędna odpowiedz 3:
+      input(type="text", name="incorAns3", placeholder="Niepoprawna odpowiedz")
+      </br>
+      input(type="submit", value="prześlij")
