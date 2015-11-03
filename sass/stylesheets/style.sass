@@ -3,6 +3,8 @@
 $second: #663399
 $main: white
 
+*
+  font-family: roboto_regular
 
 /* indexpage layout */
 #index
@@ -12,14 +14,44 @@ $main: white
   color: $main
   h1
     margin: 0
-    padding: 30vh 0 0 0
+    padding: 20vh 0 5vh 0
+  form
+    color: black
+    max-width: 400px
+    background: #ecf0f1
+    margin: 0 auto
+    padding: 50px 0
+    border-radius: 2px
+    box-shadow: 0 0 5px #222
+  label
+    text-align: right
+    padding-top: 7px
+    font-weight: lighter
+  .log
+    background: $main
+    padding: 5px
+    margin-bottom: 15px
+    outline: 0
+    border: 2px solid #CCC
+    border-radius: 4px
+  .log-button
+    background: $main
+    border-radius: 4px
+    border: 0
+    padding: 7px 25px
+    margin: 15px auto 0 auto
+    color: $main
+    background: $second
+  .inputs-log
+    position: relative
+    left: -30px
+
 /* quizpage layout */
 #quiz
   color: white
   height: 100vh
   width: 100%
   background: $second
-  font-family: roboto_regular
 
   h1
     padding: 0
@@ -36,13 +68,57 @@ $main: white
     max-width: 450px
     margin: 10px auto
     padding: 10px
-    background-image: linear-gradient(to bottom, white, #ddd)
-    border: 4px solid #BBB
     border-radius: 5px
     text-align: center
     color: #555
     font-size: 18px
-    &:active
-      background-image: linear-gradient(to top, white, #ddd)
-a
-  padding: 20px
+    transition: (300ms all)
+  .next
+    text-align: center
+    padding: 10px 20px
+    background: $main
+    display: none
+
+
+/* footer style */
+footer
+  position: absolute
+  bottom: 20px
+  a
+    padding: 0 20px
+
+/* Adding Quiz Layout */
+#add-quiz
+  background: $second
+  min-height: 100vh
+  text-align: center
+  h1
+    margin: 0
+    padding: 10vh 0 10vh 0
+
+/* Errors style */
+.error-holder
+  width: 300px
+  border: 2px solid red
+  margin: 20px auto
+  padding: 10px
+  background: lighten(red, 20%)
+  color: darken(red, 10%)
+  ul
+    padding: 0
+    margin: 0
+    li
+      margin: 5px
+
+/* Class to add */
+.normal-ans
+  background-image: linear-gradient(to bottom, white, #ddd)
+  border: 4px solid #BBB
+  &:active
+    background-image: linear-gradient(to top, white, #ddd)
+.correct-ans
+  background: #2ecc71
+  border: 4px solid #16a085
+.wrong-ans
+  background: #e74c3c
+  border: 4px solid #c0392b

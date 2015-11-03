@@ -1,9 +1,18 @@
 doctype html
-html
+html(ng-app)
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    script(src="//code.jquery.com/jquery-1.11.3.min.js")
     script(src="/javascripts/function.js")
   body
     block content
+    
+    footer
+      a(href="/register") Register
+      -if(global.CurrentUser !== undefined ) 
+        a(href="/quizpage") Go to Quiz
+        a(href="/addquiz") Add Quiz
+        a(href="/logout") logout
+      

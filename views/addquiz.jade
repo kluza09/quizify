@@ -1,26 +1,31 @@
 extends layout
 
 block content
-  h1= title
-  -if(errorArray !== undefined ) 
-    #error-holder
-      -for(var j=0; j < errorArray.length; j++)
-        h5= errorArray[j]
-  .container
-    form(method="post", action="/addquiz")
-      label Treść pytania:
-      textarea(type="text", name="contentQ", placeholder="pytanie")
-      </br>
-      label Poprawna odpowiedz:
-      input(type="text", name="corAns", placeholder="Poprawna odpowiedz")
-      </br>
-      label Błędna odpowiedz 1:
-      input(type="text", name="incorAns1", placeholder="Niepoprawna odpowiedz")
-      </br>
-      label Błędna odpowiedz 2:
-      input(type="text", name="incorAns2", placeholder="Niepoprawna odpowiedz")
-      </br>
-      label Błędna odpowiedz 3:
-      input(type="text", name="incorAns3", placeholder="Niepoprawna odpowiedz")
-      </br>
-      input(type="submit", value="prześlij")
+  #add-quiz
+    h1= title
+    -if(errorArray !== undefined ) 
+      .error-holder.container
+        ul
+        -for(var j=0; j < errorArray.length; j++)
+          li= errorArray[j]
+    .container
+      form(method="post", action="/addquiz")
+        label Treść pytania:
+        textarea(type="text", name="contentQ", placeholder="pytanie")
+        </br>
+        label Kategoria:
+        input(type="text", name="categoryQ", placeholder="kategoria", maxlength="40")
+        </br>
+        label Poprawna odpowiedz:
+        input(type="text", name="corAns", placeholder="Poprawna odpowiedz", maxlength="40")
+        </br>
+        label Błędna odpowiedz 1:
+        input(type="text", name="incorAns1", placeholder="Niepoprawna odpowiedz", maxlength="40")
+        </br>
+        label Błędna odpowiedz 2:
+        input(type="text", name="incorAns2", placeholder="Niepoprawna odpowiedz", maxlength="40")
+        </br>
+        label Błędna odpowiedz 3:
+        input(type="text", name="incorAns3", placeholder="Niepoprawna odpowiedz", maxlength="40")
+        </br>
+        input(type="submit", value="prześlij")

@@ -7,16 +7,26 @@ var bodyParser = require('body-parser');
 var sass = require('node-sass');
 var sassMiddleware = require('node-sass-middleware')
 var mongo = require('mongodb')
-var monk = require('monk');
+var mongoose = require('mongoose');
+var modelsDB = require('./public/javascripts/modelsDB');
 
-var db =  monk('127.0.0.1:27017/questions');
+mongoose.connect('mongodb://127.0.0.1:27017/questions');
+
+var db = mongoose.connection;
+  db.on('error', console.error.bind(console, 'connection error:'));
+  db.once('open', function (callback) {
+});
 
 
+
+//Routes
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var register = require('./routes/register');
 var quizpage = require('./routes/quizpage');
 var categoryquizpage = require('./routes/categoryquizpage');
 var addquiz = require('./routes/addquiz');
+var logout = require('./routes/logout');
+var userpage = require('./routes/userpage');
 
 var app = express();
 
@@ -46,10 +56,14 @@ app.use(function(req,res,next){
 });
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/register', register);
+//app.use('/registersuccess', registersuccess);
 app.use('/quizpage', quizpage);
 app.use('/addquiz', addquiz);
-app.use('/catquizpage', categoryquizpage)
+app.use('/catquizpage', categoryquizpage);
+app.use('/logout', logout);
+app.use('/userpage', userpage);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

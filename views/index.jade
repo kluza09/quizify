@@ -2,11 +2,21 @@ extends layout
 
 block content
   #index
-    h1= title
-    p Welcome to #{title}
-    ul
-      each user, i in userlist
-        li
-          a(href="mailto:#{user.email}")= user.username
-    a(href="/quizpage") Go to Quiz
-    a(href="/addquiz") Add Quiz
+    .container
+      h1= title
+      -if(errorArray !== undefined ) 
+        .error-holder
+          ul
+            li= errorArray
+      form(method="post",action="/")
+        .inputs-log
+          .row
+            label.col-sm-4.col-sm-push-2.col-xs-4.col-xs-push-2 Nazwa:
+            input(type="text", name="user").log.col-sm-4.col-sm-push-2.col-xs-4.col-xs-push-2
+          .row
+            label.col-sm-4.col-sm-push-2.col-xs-4.col-xs-push-2 Hasło:
+            input(type="password", name="pass").log.col-sm-4.col-sm-push-2.col-xs-4.col-xs-push-2
+        .row
+          input(type="submit", value="loguj").log-button
+
+  

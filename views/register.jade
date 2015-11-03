@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  #register
+    h1= title
+    -if(errorArray !== undefined ) 
+      .error-holder.container
+        ul
+        -for(var j=0; j < errorArray.length; j++)
+          li= errorArray[j]
+    .container
+      form(method="post", action="/register")
+        label Nazwa:
+        input(type="text", name="username", placeholder="pytanie")
+        </br>
+        label email:
+        input(type="email", name="email", placeholder="Niepoprawna odpowiedz")
+        </br>
+        label Hasło:
+        input(type="password", name="pass", placeholder="pytanie")
+        </br>
+        label Powtórz Hasło:
+        input(type="password", name="passRepeat", placeholder="Poprawna odpowiedz")
+        </br>
+        input(type="submit", value="prześlij")
