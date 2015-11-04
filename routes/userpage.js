@@ -10,4 +10,8 @@ router.get('/', function(req, res, next) {
   }
 });
 
+router.get('/profile', function(req, res, next) {
+  res.render('userpage_parts/profile', {title: "Profil"});
+});
+
 module.exports = router;

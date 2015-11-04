@@ -10,9 +10,9 @@ html(ng-app)
     block content
     
     footer
-      a(href="/register") Register
-      -if(global.CurrentUser !== undefined ) 
-        a(href="/quizpage") Go to Quiz
-        a(href="/addquiz") Add Quiz
-        a(href="/logout") logout
+      -if(global.CurrentUser == undefined ) 
+        a(href="/register") Register
+      -else
+        a(href="/userpage") Userpage
+
       

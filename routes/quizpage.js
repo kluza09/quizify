@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var modelsDB = require('../public/javascripts/modelsDB');
 var auth = require('../public/javascripts/auth');
 
-/* GET home page. */
+/* GET Quiz page. */
 router.get('/', function(req, res, next) {
   console.log(auth.isLogged());
   if(auth.isLogged()){

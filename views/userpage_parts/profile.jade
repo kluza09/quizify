@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  #userpage
+    .container
+      .row
+        .col-sm-10.col-sm-push-2
+          h1= title
+          h4 Nick: #{global.CurrentUser.name}
+          h4 Email: #{global.CurrentUser.email}
+  
+  include ../partials/sidemenu
