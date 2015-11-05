@@ -11,6 +11,7 @@ var UserModel = mongoose.model('user',{
   name:String,
   email:String,
   password:String,
+  desc:String,
   active:String
 },"users")
 

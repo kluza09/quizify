@@ -1,3 +1,4 @@
+//checking answer
 function checkAnswer(ansID,correctID,but){
   $("#quiz p").removeAttr("onclick");
   $(but).removeClass('normal-ans')
@@ -11,6 +12,8 @@ function checkAnswer(ansID,correctID,but){
   }
   $(".next").show();
 }
+
+
 
 //random shuffle array elements
 function shuffle(o){

@@ -8,6 +8,12 @@ block content
           h1= title
           h4 Nick: #{global.CurrentUser.name}
           h4 Email: #{global.CurrentUser.email}
-  
-  
+          -if(global.CurrentUser.desc)
+            h4 O mnie: #{global.CurrentUser.desc}
+          hr
+          h4 Dodaj opis:
+          form(method="POST", action="/userpage/profile")
+            textarea(name="desc", placeholder="O mnie")
+            input(type="submit", value="Dodaj")
+              
   include ../partials/sidemenu
