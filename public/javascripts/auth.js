@@ -16,8 +16,18 @@ function destroySession(){
   delete global.CurrentUser;
 }
 
+function isQuestionRepeat(index,array){
+  for(var i = 0; i < array.length; i++){
+    if(index==array[i]){
+      return true;
+    }
+  }
+  return false;
+}
+
 module.exports = {
   isLogged: isLogged,
   setUserLog: setUserLog,
-  destroySession: destroySession
+  destroySession: destroySession,
+  isQuestionRepeat: isQuestionRepeat
 }
