@@ -17,9 +17,11 @@ function checkAnswer(ansID,correctID,but){
   }
   $(".next").show();
 
-  $.post('quizpage', { correct : isCorrectAns});
+  $.post('quizpage', {
+    correct : isCorrectAns,
+    clickedAns: ansID
+  });
 }
-
 
 
 //random shuffle array elements

@@ -7,7 +7,9 @@ var auth = require('../public/javascripts/auth');
 var count = 0;
 var questionCounter = 0;
 var usedQuestions = [];
+var usedAnswers = [];
 var questionNumber;
+var clickedAns;
 
 /* GET Quiz page. */
 router.get('/', function(req, res, next) {
@@ -22,11 +24,31 @@ router.get('/', function(req, res, next) {
           res.render('quizpage', { title: 'QUIZ', "questions" : docs[questionNumber], func: shuffle });
       });
     } else {
-      var score = count;
+      var scoreTemp = count;
+
       questionCounter = 0;
       count = 0;
-      usedQuestions = [];
-      res.render('quizend',{score: score})
+      var d = new Date()
+
+      // Creating archive file
+      var Archivum = new modelsDB.ArchModel({
+        player: global.CurrentUser.name,
+        questions: [],
+        score: scoreTemp,
+        date: d
+      })
+      for(var i = 0; i < usedQuestions.length; i ++ ){
+        Archivum.questions.push({questionNumber:usedQuestions[i],clikedID:usedAnswers[i]});
+      }
+
+      Archivum.save(function(err){
+        if(err) console.log(err);
+        else {
+          usedQuestions = [];
+          usedAnswers = []; 
+          res.render('quizend',{score: scoreTemp});
+        }
+      });
     }
   } else {
     res.redirect('/');
@@ -34,6 +56,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res) {
+  clickedAns = req.body.clickedAns;
+  usedAnswers.push(clickedAns);
   if(req.body.correct=="true"){
     count++;
   }

@@ -15,8 +15,16 @@ var UserModel = mongoose.model('user',{
   active:String
 },"users")
 
+var ArchModel = mongoose.model('archivum',{
+  player: String,
+  questions:[{questionNumber:Number,clikedID:Number}],
+  score: Number,
+  date: Date
+},"archivs")
+
 
 module.exports = {
   QuizQestionModel: QuizQestionModel,
-  UserModel: UserModel
+  UserModel: UserModel,
+  ArchModel: ArchModel
 };
