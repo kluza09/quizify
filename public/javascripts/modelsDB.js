@@ -19,7 +19,7 @@ var ArchModel = mongoose.model('archivum',{
   player: String,
   questions:[{questionNumber:Number,clikedID:Number}],
   score: Number,
-  date: Date
+  date: String
 },"archivs")
 
 

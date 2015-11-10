@@ -29,13 +29,18 @@ router.get('/', function(req, res, next) {
       questionCounter = 0;
       count = 0;
       var d = new Date()
+      var day = d.getDate();
+      var month = d.getMonth();
+      var year = d.getFullYear();
+      var hours = d.getHours();
+      var minutes = (d.getMinutes()<10?'0':'') + d.getMinutes()
 
       // Creating archive file
       var Archivum = new modelsDB.ArchModel({
         player: global.CurrentUser.name,
         questions: [],
         score: scoreTemp,
-        date: d
+        date: day + "." + month + "." + year + " " + hours + ":" + minutes
       })
       for(var i = 0; i < usedQuestions.length; i ++ ){
         Archivum.questions.push({questionNumber:usedQuestions[i],clikedID:usedAnswers[i]});
@@ -45,7 +50,7 @@ router.get('/', function(req, res, next) {
         if(err) console.log(err);
         else {
           usedQuestions = [];
-          usedAnswers = []; 
+          usedAnswers = [];
           res.render('quizend',{score: scoreTemp});
         }
       });
