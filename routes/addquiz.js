@@ -1,17 +1,11 @@
 var express = require('express');
-var fs = require('fs');
 var router = express.Router();
-var mongoose = require('mongoose');
-var modelsDB = require('../public/javascripts/modelsDB');
-var auth = require('../public/javascripts/auth');
+var models = require('../config/models');
+var utils = require('../config/utils');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  if(auth.isLogged()){
-    res.render('addquiz', { title: 'Add Quiz Questions'});
-  } else {
-    res.redirect('/');
-  }
+router.get('/', utils.requireLogin, function(req, res, next) {
+  res.render('addquiz', { title: 'Add Quiz Questions',csrfToken: req.csrfToken()});
 });
 
 router.post('/', function(req, res) {
@@ -26,7 +20,7 @@ router.post('/', function(req, res) {
   if(error.length != 0){
     res.render('addquiz', { title: 'ADD QUIZ QUESTIONS', errorArray: error});
   } else {
-    var newQ = new modelsDB.QuizQestionModel({
+    var newQ = new models.QuizQestionModel({
       category:req.body.categoryQ,
       questionContent:req.body.contentQ,
       answer:[{id:"1",answerContent:req.body.corAns},
@@ -42,7 +36,7 @@ router.post('/', function(req, res) {
         }
         else {
             // And forward to success page
-            res.redirect("/");
+            res.redirect("/userpage");
         }
     });
   }

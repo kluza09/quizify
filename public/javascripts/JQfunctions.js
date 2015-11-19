@@ -13,7 +13,6 @@ $(function(){
 
       $("#archives .wrapper p").click(function(){
           $(this).closest('.row').next(".arch-content").slideToggle(150);
-
           $(".arch-content").not($(this).closest('.row').next(".arch-content")).slideUp(150);
       });
 

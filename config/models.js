@@ -7,9 +7,9 @@ var QuizQestionModel = mongoose.model('quest',{
   correctID:String
 },"quiz")
 
-var UserModel = mongoose.model('user',{
-  name:String,
-  email:String,
+var UserModel = mongoose.model('User',{
+  name:{type:String, unique: true},
+  email:{type:String, unique: true},
   password:String,
   desc:String,
   active:String

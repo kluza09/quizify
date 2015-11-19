@@ -1,64 +1,50 @@
 var express = require('express');
-var auth = require('../public/javascripts/auth');
-var mongoose = require('mongoose');
-var modelsDB = require('../public/javascripts/modelsDB');
+var utils = require('../config/utils');
+var models = require('../config/models');
 var router = express.Router();
 var lastGames;
 var allGames = [];
 
-router.get('/', function(req, res, next) {
-  if(auth.isLogged()){
-    res.render('userpage',{title: global.CurrentUser.name});
-  } else {
-    res.redirect('/');
-  }
-});
-
-router.get('/profile', function(req, res, next) {
-  res.render('userpage_parts/profile', {title: "Profil"});
-});
-
-router.get('/archives', function(req, res, next) {
-  allGames = [];
-  if(auth.isLogged()){
-
-    modelsDB.ArchModel.find({player:global.CurrentUser.name},function(e,docs){
-      lastGames = docs;
-
-      modelsDB.QuizQestionModel.find({},function(e,docs){
-        for(var j = 0; j < lastGames.length; j++){
-          game = [];
-          for(var i = 0; i < lastGames[j].questions.length; i++){
-            game.push(docs[lastGames[j].questions[i].questionNumber]);
-          }
-          allGames.push(game);
-        }
-        res.render('userpage_parts/archives',{title: "Ostatnio Rozegrane", games:allGames.reverse(), UserAns:lastGames.reverse() });
-      });
-    });
-
-  } else {
-    res.redirect('/');
-  }
-});
-
-router.get('/settings', function(req, res, next) {
-  if(auth.isLogged()){
+router.get('/', utils.requireLogin, function(req, res, next) {
     res.render('userpage');
-  } else {
-    res.redirect('/');
-  }
+});
+
+router.get('/profile', utils.requireLogin, function(req, res, next) {
+  res.render('userpage_parts/profile', {title: "Profil" , csrfToken: req.csrfToken()});
+});
+
+router.get('/archives', utils.requireLogin, function(req, res, next) {
+  allGames = [];
+
+  models.ArchModel.find({player: req.user.name},function(e,docs){
+    lastGames = docs;
+
+    models.QuizQestionModel.find({},function(e,docs){
+      for(var j = 0; j < lastGames.length; j++){
+        game = [];
+        for(var i = 0; i < lastGames[j].questions.length; i++){
+          game.push(docs[lastGames[j].questions[i].questionNumber]);
+        }
+        allGames.push(game);
+      }
+      res.render('userpage_parts/archives',{title: "Ostatnio Rozegrane", games:allGames.reverse(), UserAns:lastGames.reverse() });
+    });
+  });
+});
+
+router.get('/settings', utils.requireLogin, function(req, res, next) {
+    res.render('userpage');
 });
 
 router.post('/profile', function(req, res, next) {
   var desc = req.body.desc;
-  modelsDB.UserModel.update({ name: global.CurrentUser.name }, { $set: { desc: desc }}, function(err,docs){
+  models.UserModel.update({ name: req.user.name }, { $set: { desc: desc }}, function(err,docs){
     if(err) console.log(err);
     else {
-      modelsDB.UserModel.findOne({ name: global.CurrentUser.name }, function (err, content) {
+      models.UserModel.findOne({ name: req.user.name }, function (err, content) {
         if(err) console.log(err);
         else {
-          auth.setUserLog(content);
+          utils.createUserSession(req, res, content);
           res.redirect('/userpage/profile');
         }
       });

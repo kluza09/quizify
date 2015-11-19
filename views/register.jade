@@ -10,6 +10,7 @@ block content
           li= errorArray[j]
     .container
       form(method="post", action="/register")
+        
         label Nazwa:
         input(type="text", name="username", placeholder="pytanie")
         </br>
@@ -21,5 +22,6 @@ block content
         </br>
         label Powtórz Hasło:
         input(type="password", name="passRepeat", placeholder="Poprawna odpowiedz")
+        input(type="hidden", name="_csrf", value=csrfToken)
         </br>
         input(type="submit", value="prześlij")

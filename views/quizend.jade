@@ -1,4 +1,10 @@
 extends layout
 
 block content
-  h1 Twój Wynik: #{score}
+  #quizend
+    h1 Twój Wynik: #{score}
+    .row
+      .col-sm-2.col-sm-push-4
+        a(href="/userpage") Menu
+      .col-sm-2.col-sm-push-4
+        a(href="/quizpage") Graj Ponownie

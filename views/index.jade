@@ -8,9 +8,10 @@ block content
         .error-holder
           ul
             li= errorArray
-      form(method="post",action="/")
+      form(method="post",action="/")            
         .inputs-log
           .row
+            input(type="hidden", name="_csrf", value=csrfToken)
             label.col-sm-4.col-sm-push-2.col-xs-4.col-xs-push-2 Nazwa:
             input(type="text", name="user").log.col-sm-4.col-sm-push-2.col-xs-4.col-xs-push-2
           .row

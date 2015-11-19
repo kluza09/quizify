@@ -15,11 +15,13 @@ function checkAnswer(ansID,correctID,but){
       $("p[value='"+correctID+"']").removeClass('normal-ans').addClass('correct-ans');
     },500)
   }
-  $(".next").show();
+  setTimeout(function(){
+    $(".next").show();
+  },1000)
 
   $.post('quizpage', {
     correct : isCorrectAns,
-    clickedAns: ansID
+    clickedAns: ansID,
   });
 }
 

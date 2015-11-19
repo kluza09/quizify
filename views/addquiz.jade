@@ -10,6 +10,7 @@ block content
           li= errorArray[j]
     .container
       form(method="post", action="/addquiz")
+        input(type="hidden", name="_csrf", value=csrfToken)
         label Treść pytania:
         textarea(type="text", name="contentQ", placeholder="pytanie")
         </br>

@@ -8,12 +8,12 @@ html(ng-app)
     script(language="JavaScript", type="text/javascript", src="/javascripts/function.js")
     script(language="JavaScript", type="text/javascript", src="/javascripts/JQfunctions.js")
   body
+    -if(user) 
+      include partials/header
     block content
     
     footer
-      -if(global.CurrentUser == undefined ) 
+      -if(!user) 
         a(href="/register") Register
-      -else
-        a(href="/userpage") Userpage
 
       

@@ -2,31 +2,32 @@ extends ../layout
 
 block content
   #archives
-    .container
-      .row
-        .col-sm-8.col-sm-push-2
-          h1= title
-          -for(var j = 0; j < games.length; j++){
-            .row
-              .wrapper
-                .col-sm-10
-                  h3 Wynik: #{UserAns[j].score}
-                  h6 #{UserAns[j].date}
-                .col-sm-2
-                  p Zobacz
-            .arch-content
-              for item, i in games[j]
-                .row
-                  h4= item.questionContent
-                  -if(UserAns[j].questions[i].clikedID == item.correctID){
+    .content
+      .container
+        .row
+          .col-sm-8.col-sm-push-2
+            h1= title
+            -for(var j = 0; j < games.length; j++){
+              .row
+                .wrapper
+                  .col-sm-10
+                    h3 Wynik: #{UserAns[j].score}
+                    h6 #{UserAns[j].date}
+                  .col-sm-2
+                    p Zobacz
+              .arch-content
+                for item, i in games[j]
+                  .row
+                    h4= item.questionContent
+                    -if(UserAns[j].questions[i].clikedID == item.correctID){
+                      .col-sm-4
+                        h5.correct-ans Your Answer: #{item.answer[UserAns[j].questions[i].clikedID - 1].answerContent}
+                    -} else {
+                      .col-sm-4
+                        h5.wrong-ans Your Answer: #{item.answer[UserAns[j].questions[i].clikedID - 1].answerContent}
+                    -}
                     .col-sm-4
-                      h5.correct-ans Your Answer: #{item.answer[UserAns[j].questions[i].clikedID - 1].answerContent}
-                  -} else {
-                    .col-sm-4
-                      h5.wrong-ans Your Answer: #{item.answer[UserAns[j].questions[i].clikedID - 1].answerContent}
-                  -}
-                  .col-sm-4
-                    h5.correct-ans Correct Answer: #{item.answer[item.correctID - 1].answerContent}
-          -}
-              
+                      h5.correct-ans Correct Answer: #{item.answer[item.correctID - 1].answerContent}
+            -}
+                
   include ../partials/sidemenu
